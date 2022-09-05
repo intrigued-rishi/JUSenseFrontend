@@ -2,8 +2,8 @@ import React from 'react'
 import NavBar from './components/Navbar'
 // import Home from './components/Home'
 import ShowAll from './components/ShowAll' 
-import './App.css'
-import './index.css'
+// import './App.css'
+// import './index.css'
 import { BrowserRouter,Routes,Route} from 'react-router-dom'
 
 

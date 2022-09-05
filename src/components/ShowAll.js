@@ -1,12 +1,11 @@
 import React,{useState, useEffect} from "react";
 import axios from "axios";
 import { useNavigate} from "react-router-dom";
-import M from "materialize-css";
+import Table from 'react-bootstrap/Table';
 
 
-const ViewAppointment = () => {
+function DarkExample() {
 
-  const navigate = useNavigate();
   const [appointmentdata,setAppointmentdata] =useState([]);
 
   useEffect(() =>{  
@@ -23,79 +22,42 @@ const ViewAppointment = () => {
     }
   },[]);
 
+  function convert(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
+
+
   return (
-    <>
-      <section>
-          <div className="container">
-            <div className="row">
-              <div className="col">
-                <p className="h3 ">Upcoming Appointments</p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col">
-                <div className="table-responsive">
-                  <table /*className="table table-bordered table-hover table-hover text-center table-success table-striped"*/>
-                    <thead /*className="thead-dark text-secondary"*/>
-                      <tr>
-                        <th>Date</th>
-                        <th>Time</th>
-                        {/* <th>Expert Name</th> */}
-                        <th>Mode</th>
-                      
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    {
-                      appointmentdata && appointmentdata.map((appointment,index)=>{
-                        // console.log(curtime+" "+appointment.book_time)
-                      return(
-                        
-                         <tr key={appointment._id}>
-                            <td className="text-center"><strong>{appointment.date}</strong></td>
-                            <td className="text-center"><strong>{appointment.title}</strong></td>
-                            {/* <td className="text-center"></td> */}
-                             <td className="text-center"><strong>{appointment.url}</strong></td>
-                           
-                            {/* <td className="text-center">
-                              { 
-                                appointment.mode==="audio" && 
-                                <button className="btn btn-primary btn-sm" onClick={()=>(convert(new Date(appointment.book_date))==curdate && curtime>=appointment.book_time)?navigate(`/meet/audio/${appointment.link}`):M.toast({html: "Cannot join before time",classes: "#f44336 red",})}>
-                                  Join
-                                </button>
-                              }
-                              { 
-                                appointment.mode==="video" && 
-                                <button className="btn btn-primary btn-sm" onClick={()=>(convert(new Date(appointment.book_date))==curdate && curtime>=appointment.book_time)?navigate(`${appointment.link}`):M.toast({html: "Cannot join before time",classes: "#f44336 red",})}>
-                                  Join
-                                </button>
-                              }
-                              {
-                                appointment.mode==="physical" &&
-                                <a href={appointment.link} classtarget="_blank"><button
-                                  className="btn btn-primary btn-sm"
-                                >
-                                  Address
-                                </button></a>
-                              }
-                            </td> */}
-                          </tr>
-                          
-                    )})}
-                      
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        {/* )} */}
-      </section>
-
-       
-    </>
+    <Table striped bordered hover>
+      <thead style={{position: "sticky", top: "0",backgroundColor:"darkgray"}}>
+        <tr style={{position: "sticky", top: "0"}}>
+          <th class="text-center"><h3>Date</h3></th>
+          <th class="text-center"><h3>Title</h3></th>
+          <th class="text-center"><h3>Link</h3></th>
+        </tr>
+      </thead>
+      <tbody>
+      {
+          appointmentdata && appointmentdata.map((appointment,index)=>{
+            // console.log(curtime+" "+appointment.book_time)
+          return(
+            
+              <tr key={appointment._id}>
+                <td className="text-center" style={{width:"10%"}}><strong>{convert(new Date(appointment.date))}</strong></td>
+                <td className="text-center"><strong>{appointment.title}</strong></td>
+                {/* <td className="text-center"></td> */}
+                <td className="text-center"><strong><a href={appointment.url} target="_blank">More Info</a></strong></td>
+                {/* <td className="text-center">More</td> */}
+              </tr>      
+        )})
+      
+      }               
+      </tbody>
+    </Table>
   );
-};
+}
 
-export default ViewAppointment;
+export default DarkExample;
