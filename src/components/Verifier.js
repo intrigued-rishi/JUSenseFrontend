@@ -8,8 +8,8 @@ import { LegendToggleSharp } from "@mui/icons-material";
 
 const bucketName= 'ju-sense';
 const region= 'us-east-1';
-const accessKeyId= 'AKIA2BX5TSBW2P5ALWTT';
-const secretAccessKey= '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';
+const accessKeyId= '';
+const secretAccessKey= '';
 
 aws.config.update({
   accessKeyId:'AKIA2BX5TSBW2P5ALWTT',
