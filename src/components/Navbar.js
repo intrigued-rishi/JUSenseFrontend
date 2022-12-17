@@ -14,6 +14,7 @@ const NavBar=()=>{
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/showAll">Data</Nav.Link>
+            <Nav.Link href="/upload">Verifier</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
