@@ -12,8 +12,8 @@ const accessKeyId= '';
 const secretAccessKey= '';
 
 aws.config.update({
-  accessKeyId:'AKIA2BX5TSBW2P5ALWTT',
-  secretAccessKey:'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'
+  accessKeyId:'',
+  secretAccessKey:''
 });
 
 const myBucket = new aws.S3({
