@@ -3,23 +3,7 @@ import axios from "axios";
 import Form from 'react-bootstrap/Form';
 
 
-
-// const bucketName= 'ju-sense';
-// const region= 'us-east-1';
-// const accessKeyId= '';
-// const secretAccessKey= '';
-
-// aws.config.update({
-//   accessKeyId:'',
-//   secretAccessKey:''
-// });
-
-// const myBucket = new aws.S3({
-//   params: { Bucket: bucketName},
-//   region: region,
-// })
-
-function Verifier() {
+function Uploader() {
 
   const [description,setDescription] =useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -31,20 +15,6 @@ function Verifier() {
     // console.log(e.target.files[0]);
   }
 
-  const convertBase64 = (file) => {
-      return new Promise((resolve, reject) => {
-          const fileReader = new FileReader();
-          fileReader.readAsDataURL(file);
-
-          fileReader.onload = () => {
-              resolve(fileReader.result);
-          };
-
-          fileReader.onerror = (error) => {
-              reject(error);
-          };
-      });
-  };
 
   useEffect(() =>{  
     
@@ -78,34 +48,7 @@ function Verifier() {
       });
   }
   
-  // const submit=async (e)=>{
 
-  //   const params = {
-  //     ACL: 'public-read',
-  //     Body: selectedFile,
-  //     Bucket: bucketName,
-  //     Key: name
-  //   };
-
-  //   myBucket.putObject(params).promise()
-  //   .then((res)=>{
-  //     var config = { headers: {  
-  //       'Content-Type': 'application/json',
-  //       'Access-Control-Allow-Origin': '*'}
-  //     }
-  //     const img_url='https://ju-sense.s3.amazonaws.com/'+name;
-  //     axios.post('/image',{'img':img_url},config)
-  //     .then((res)=>{
-  //       console.log(res);
-  //     })
-  //     .catch((err)=>{
-  //       console.log(err);
-  //     });
-  //   })
-  //   .catch((err)=>{
-  //     console.log(err);
-  //   });
-  // }
 
   return (
     <>
