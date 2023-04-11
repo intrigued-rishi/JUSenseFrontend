@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from "react";
 import axios from "axios";
 import Form from 'react-bootstrap/Form';
-
+import Accordion from 'react-bootstrap/Accordion';
 
 
 // const bucketName= 'ju-sense';
@@ -24,27 +24,13 @@ function Verifier() {
   const [description,setDescription] =useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [name,setName] = useState("");
+  const [metadata,setMetadata] = useState(null);
 
   const handleFileInput = (e) => {
     setSelectedFile(e.target.files[0]);
     setName(e.target.files[0].name);
     // console.log(e.target.files[0]);
   }
-
-  const convertBase64 = (file) => {
-      return new Promise((resolve, reject) => {
-          const fileReader = new FileReader();
-          fileReader.readAsDataURL(file);
-
-          fileReader.onload = () => {
-              resolve(fileReader.result);
-          };
-
-          fileReader.onerror = (error) => {
-              reject(error);
-          };
-      });
-  };
 
   useEffect(() =>{  
     
@@ -53,12 +39,12 @@ function Verifier() {
 
   const handleInputChange=(e)=>{
     console.log(e.target.value);
-    // setSelectedFile(e.target.files[0]);
+    setDescription(e.target.value);
     
   }
   const uploadImage = () => {
       const data = new FormData()
-      data.append("file", selectedFile)
+      data.append("text", description);
       // data.append("upload_preset", "kdanm5hs")
       // data.append("cloud_name","dsacngys7")
       // fetch("https://api.cloudinary.com/v1_1/dsacngys7/image/upload",{
@@ -73,8 +59,11 @@ function Verifier() {
 
       axios({
         method:'post',
-        url:"/getRAPredictionFromImage",
+        url:"/extraction",
         data:data
+      }).then((data)=>{
+        console.log(data);
+        setMetadata(data.data.result);
       });
   }
   
@@ -114,10 +103,27 @@ function Verifier() {
                 <Form.Label>Accident Description:</Form.Label>
                 <Form.Control as="textarea" rows={3} onChange={handleInputChange}/>
             </Form.Group>
-            <label class="form-label" for="customFile">Accident Image:</label>
+            <label className="form-label" for="customFile">Accident Image:</label>
             <input type="file" onChange={handleFileInput} fclass="form-control" id="customFile"/>  
             <button type="button" class="btn btn-secondary btn-rounded my-2" onClick={uploadImage}>Submit</button>
         </Form>
+        <div style={{width:"50%",margin:"auto"}}>
+        {
+          metadata && 
+          <Accordion>
+            {
+              Object.keys(metadata).map((key,index) => (
+                <Accordion.Item eventKey={index}>
+                  <Accordion.Header>{key}</Accordion.Header>
+                  <Accordion.Body>
+                    {metadata[key]}
+                  </Accordion.Body>
+                </Accordion.Item>
+              ))
+            }
+          </Accordion> 
+        }
+        </div>  
     </>
   );
 }

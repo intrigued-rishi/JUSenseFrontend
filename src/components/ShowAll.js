@@ -14,8 +14,8 @@ function DarkExample() {
         url: '/fetchAll',
         method: 'GET',
         }).then((res)=>{
-        setAppointmentdata(res.data);
-        console.log(res.data);
+        setAppointmentdata(JSON.parse(res.data.result));
+        console.log(res.data.result);
       }).catch((err)=>{
         console.log(err);
       })

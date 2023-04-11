@@ -15,7 +15,7 @@ const NavBar=()=>{
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/showAll">Data</Nav.Link>
             <Nav.Link href="/upload">Verifier</Nav.Link>
-            <Nav.Link href="/uploadData">Upload</Nav.Link>
+            <Nav.Link href="/uploadData">Search</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
